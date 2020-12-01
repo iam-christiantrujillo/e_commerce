@@ -1,0 +1,42 @@
+.product{
+    border: 1px solid black;
+    margin: 30px;
+}
+
+.infoProduct{
+    display: flex;
+    padding: 100px;
+    
+}
+
+
+.imagenP{
+    width: 400px;    
+}
+
+.info{
+    width: 50%;
+}
+
+.imageI{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buydisable{
+    width: 200px;
+    height: 30px;
+    margin:40px 20px 20px 20px;
+}
+
+.noImg{
+    margin:20px;
+}
+
+.explain{
+    font-size: 15px;
+    color: rgb(73, 73, 73);
+    margin:0 20px;
+}
