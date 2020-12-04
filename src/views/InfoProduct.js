@@ -1,7 +1,10 @@
 import React from 'react';
-import './InfoProduct.css'
+import './InfoProduct.css';
+import payload from '../utils/payload';
 
 function InfoProduct({product}){
+
+    const user = payload();
 
     return(
         <div className="product">
@@ -21,8 +24,22 @@ function InfoProduct({product}){
                             <p className="about">{product.description}</p>
                             <p className="about">Category: {product.category}</p>
 
-                            <button className="buydisable" disabled>Buy now!</button>
-                            <p className="explain">To buy products Login!</p>
+                            {
+                                user ? 
+                                (
+                                    <div>
+                                        <button className="buyUser">Buy now!</button>
+                                    </div>
+                                )
+                                :
+                                (
+                                    <div>
+                                        <button className="buydisable" disabled>Buy now!</button>
+                                        <p className="explain">To buy products Login!</p>
+                                    </div>
+                                    
+                                )
+                            }
 
                         </div>
                     </div>
@@ -35,8 +52,24 @@ function InfoProduct({product}){
                             <p className="about">{product.description}</p>
                             <p className="about">Category: {product.category}</p>
 
-                            <button className="buydisable" disabled>Buy now!</button>
-                            <p className="explain">To buy products Login!</p>
+
+                            {
+                                user ? 
+                                (
+                                    <div>
+                                        <button className="buyUser">Buy now!</button>
+                                    </div>
+                                )
+                                :
+                                (
+                                    <div>
+                                        <button className="buydisable" disabled>Buy now!</button>
+                                        <p className="explain">To buy products Login!</p>
+                                    </div>
+                                    
+                                )
+                            }
+                            
                     </div>
             }
                 

@@ -1,10 +1,38 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './Navbar.css'
 import {useHistory} from 'react-router-dom';
+import payload from '../../utils/payload';
+import axios from 'axios';
+
 
 function Navbar(){
 
-    const history = useHistory()
+    const user = payload();
+
+    const [info, setInfo] = useState([]);
+
+    useEffect(() => {
+        const token = window.localStorage.getItem('token');
+        const config = {
+            headers:{
+                Authorization: `JWT ${token}`
+            }
+        }
+
+        axios.get(`https://ecomerce-master.herokuapp.com/api/v1/user/me`, config)
+            .then((response) => {
+                setInfo(response.data.user)
+                console.log(response.data.user)
+            })
+            .catch((error) => {
+                console.log(error.response.data.message)
+            })
+
+    },[])
+    
+
+
+    const history = useHistory();
 
     const categories = ["Books",
     "Movies",
@@ -37,7 +65,7 @@ function Navbar(){
                 <h1 className="title">Store</h1>
             </div>
 
-            <div class="bottons">
+            <div className="bottons">
 
                 <ul className="options">
 
@@ -52,17 +80,46 @@ function Navbar(){
                                     )
                                 }
                             )}   
-                            
                         </ul>
-                        
-
                     </li>
-
-
                 </ul>
-
-
             </div>
+
+            
+                
+            {
+                user ? 
+                (
+                <div className="userInfo">
+                    <div className="userCard">
+
+                        <p className="nameUser"><span className="spanRole">{info.role}</span> {info.first_name} {info.last_name}</p>
+                        <div className="imageProfile"></div>
+
+                    </div>
+
+                    {
+                        info.role === "ADMIN" ? 
+                        <button className="add">Add Product</button>
+                        :
+                        null
+                    }
+
+                    <button className="logout" onClick={() => { history.push('/logout') }}>Logout</button>
+                </div>
+                )
+                :
+                (
+                <div className="logAndSign">
+                    <button className="logSign" onClick={() => { history.push('/login') }}>Login</button>
+                    <button className="logSign" onClick={() => { history.push('/signup') }}>Signup</button>
+                </div>
+                )
+            }
+
+                
+                
+            
 
         </nav>
     )

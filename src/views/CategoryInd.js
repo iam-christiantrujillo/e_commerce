@@ -6,13 +6,13 @@ import Navbar from '../components/Navbar/Navbar';
 
 function CategoryInd(){
 
-    const paramas = useParams()
+    const params = useParams()
 
     const [products, setProducts] = useState([])
 
     useEffect(() => {
 
-        axios.get(`https://ecomerce-master.herokuapp.com/api/v1/item/?category=${paramas.name}`)
+        axios.get(`https://ecomerce-master.herokuapp.com/api/v1/item/?category=${params.name}`)
         .then(({data}) => {
             setProducts(data)
         })
